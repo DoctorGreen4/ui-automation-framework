@@ -1,0 +1,26 @@
+# Maven
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Allure
+allure-results/
+allure-report/
+
+# IntelliJ
+.idea/
+*.iml
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# VS Code
+.vscode/
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
