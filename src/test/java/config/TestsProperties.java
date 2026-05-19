@@ -9,7 +9,7 @@ import org.aeonbits.owner.Config;
  * @author Кирилл Широков
  */
 @Config.LoadPolicy(Config.LoadType.MERGE)
-@Config.Sources("file:src/main/resources/tests.properties")
+@Config.Sources("file:src/test/resources/tests.properties")
 public interface TestsProperties extends Config {
 
 

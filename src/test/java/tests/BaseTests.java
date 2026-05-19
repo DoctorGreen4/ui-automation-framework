@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+
 @ExtendWith(ScreenshotExtension.class)
 public abstract class BaseTests {
 
@@ -18,7 +20,7 @@ public abstract class BaseTests {
     @BeforeEach
     public void before() {
         driver = DriverFactory.getDriver();
-        wait = new WebDriverWait(driver, ConfigReader.testsProperties.defaultTimeout());
+        wait = new WebDriverWait(driver, Duration.ofSeconds(ConfigReader.testsProperties.defaultTimeout()));
 
         driver.manage().deleteAllCookies();
         driver.get(ConfigReader.testsProperties.baseUrl());
