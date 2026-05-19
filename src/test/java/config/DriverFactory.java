@@ -2,9 +2,8 @@ package config;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-
-import static config.ConfigReader.testsProperties;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class DriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
@@ -17,23 +16,24 @@ public class DriverFactory {
         return driver.get();
     }
 
-    private static WebDriver createDriver() {
+    public static WebDriver createDriver() {
 
-        String browser = testsProperties.browser();
+        String browser = ConfigReader.testsProperties.browser();
 
-        if (browser.equalsIgnoreCase("chrome")) {
+        switch (browser.toLowerCase()) {
 
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
+            case "chrome":
+                return new ChromeDriver();
 
-            if (testsProperties.headless()) {
-                options.addArguments("--headless=new");
-            }
+            case "edge":
+                return new EdgeDriver();
 
-            return new ChromeDriver(options);
+            case "firefox":
+                return new FirefoxDriver();
+
+            default:
+                throw new RuntimeException("Unknown browser: " + browser);
         }
-
-        throw new RuntimeException("Unsupported browser: " + browser);
     }
 
     public static void quitDriver() {
